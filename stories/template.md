@@ -1,7 +1,137 @@
 # Historia de Usuario
 
 ## ID
-HU-XXX
+HU-001
+
+## Título
+
+Acceso Seguro al Sistema (Login) y Registro de Usuario
+
+## Descripción
+**Como** Viticultor interesado en proteger mi cultivo de Hondarrabi Zuri
+
+**Quiero** poder registrarme y autenticarme en la plataforma
+
+**Para** acceder de manera privada a las métricas de mis parcelas y recibir alertas personalizadas
+
+## Criterios de Aceptación
+
+### Escenario 1: Registro de nuevo usuario
+```gherkin
+Dado que el viticultor no tiene una cuenta
+Cuando introduce su email y una contraseña segura en el formulario de registro
+Entonces sus datos se almacenan en el sistema (Json-Server) 
+Y se le redirige automáticamente a la pantalla de Login.
+```
+
+### Escenario 2: Inicio de sesión exitoso
+```gherkin
+Dado que el usuario ya está registrado
+Cuando introduce sus credenciales correctas
+Entonces el sistema valida los datos contra el servidor 
+Y lo redirige al Dashboard principal de VitisGuard.
+```
+
+### Escenario 3: Inicio de sesión exitoso
+```gherkin
+Dado que el usuario intenta registrarse o loguearse
+Cuando deja campos vacíos o introduce un formato de email incorrecto
+Entonces el sistema muestra mensajes de error en inglés (ej: "Email is required")
+```
+
+## Notas
+* Se utilizará Pinia para gestionar el estado global de la sesión del usuario (`isLoggedIn`, `userData`)
+
+* Las contraseñas en el servidor fake (`db.json`) deben manejarse siguiendo las buenas prácticas de seguridad mencionadas en el proyecto.
+
+## Estimación
+
+M (Talla Media)
+
+## Prioridad
+
+Alta (Bloqueante para el resto de funcionalidades)
+
+## Tareas
+| Código | Nombre | Responsable |
+|--------|--------|-------------|
+| HU-001-01 | Diseño de la interfaz de Login/Registro en Figma (Responsive) | Equipo Dev |
+| HU-001-02 | Implementación del formulario con validaciones en Vue 3 | Equipo Dev |
+| HU-001-03 | Creación del Store de autenticación con Pinia | Equipo Dev |
+| HU-001-04 | Servicio de conexión con Json-Server para persistencia de usuarios | Equipo Dev |
+
+## ID
+HU-002
+
+## Título
+Dashboard Integral de Monitoreo y Alerta Temprana
+
+## Descripción
+**Como** Viticultor de Txakoli
+
+**Quiero** visualizar un panel con datos de temperatura, humedad (suelo/aire), evapotranspiración, nubes, heladas y golpes de calor
+
+**Para**  recibir alertas automáticas de riesgo de enfermedades o condiciones adversas y tomar medidas preventivas que protejan mi cosecha.
+
+## Criterios de Aceptación
+
+### Escenario 1: Visualización de métricas críticas
+```gherkin
+Dado que el usuario ha iniciado sesión
+
+Cuando carga el Dashboard
+
+Entonces debe ver tarjetas con datos en tiempo real de:
+  - Temperatura y Humedad Ambiental 
+  - Temperatura y Humedad del Suelo 
+  - Evapotranspiración 
+  - Precipitación y Cobertura de Nubes 
+  - Horas de sol y detección de Heladas Fuertes o Golpes de Calor 
+Y los datos deben provenir de la API de Open-Meteo
+```
+
+### Escenario 2: Activación de Alertas y Recomendaciones por enfermedad
+```gherkin
+Dado que los datos de la API cumplen condiciones de riesgo por enfermedad fúngica (ej. alta humedad y temperaturas moderadas)
+
+Cuando el componente procesa los datos
+
+Entonces se muestra la alerta: "Riesgo de posible Enfermedad detectado" y se especifican riesgos como Mildiú, Botrytis, Oídio o Excoriosis y se ofrece una recomendación específica (ej. aumentar aireación constante en espalderas)
+```
+
+### Escenario 3: Activación de Alertas por condiciones meteorológicas adversas
+```gherkin
+Dado que los datos de la API detectan riesgos como heladas tempranas, tormentas o calor extremo
+
+Cuando el componente procesa los datos
+
+Entonces se muestra la alerta: "Riesgo por condiciones meteorológicas adversas" y se especifica el fenómeno detectado (ej. Helada inminente o exceso de pluviosidad) y se ofrece una recomendación específica (ej. cubrir lote, activar drenaje preventivo o regar para refrescar)
+```
+
+## Notas
+* **Lógica de Alerta:** Las alertas por enfermedad deben activarse especialmente en "años con datos historicos muy humedos".
+
+* **Requerimiento Técnico:** Se utilizarán las etiquetas `<suspense/>` para gestionar la espera de datos asíncronos de la API.
+
+* **Responsive:** El Dashboard debe adaptarse a dispositivos móviles, tablets y escritorio.
+
+## Estimación
+L (Talla Grande).
+
+## Prioridad
+Alta.
+
+## Tareas
+| Código | Nombre | Responsable |
+| :--- | :--- | :--- |
+| **HU-002-01** | Implementación de peticiones a Open-Meteo para métricas de suelo y aire| Equipo Dev |
+| **HU-002-02** | Desarrollo de la lógica de negocio para detectar umbrales de Mildiú y Botrytis | Equipo Dev |
+| **HU-002-03** | Creación de componentes de alerta con directivas `v-show`/`v-if` | Equipo Dev |
+| **HU-002-04** | Sistema de recomendaciones dinámicas basadas en el estado del cultivo | Equipo Dev |
+
+
+## ID
+HU-003
 
 ## Título
 Dashboard de Monitoreo Climático en Tiempo Real
@@ -49,62 +179,13 @@ Alta (Funcionalidad Core)
 ## Tareas
 | Código | Nombre | Responsable |
 | :--- | :--- | :--- |
-| **HU-001-01** | Configuración de la conexión asíncrona a la API Open-Meteo en `services/` | Equipo Dev |
-| **HU-001-02** | Creación del Composable `useWeather.ts` para gestionar la lógica de fetching | Equipo Dev |
-| **HU-001-03** | Diseño de componentes atómicos (`DataCard`) siguiendo Atomic Design | Equipo Dev |
-| **HU-001-04** | Implementación de la vista `DashboardView.vue` con soporte para `<Suspense />` | Equipo Dev |
-
-
-# Historia de Usuario
+| **HU-003-01** | Configuración de la conexión asíncrona a la API Open-Meteo en `services/` | Equipo Dev |
+| **HU-003-02** | Creación del Composable `useWeather.ts` para gestionar la lógica de fetching | Equipo Dev |
+| **HU-003-03** | Diseño de componentes atómicos (`DataCard`) siguiendo Atomic Design | Equipo Dev |
+| **HU-003-04** | Implementación de la vista `DashboardView.vue` con soporte para `<Suspense />` | Equipo Dev |
 
 ## ID
-HU-XXX
-
-## Título
-[Título descriptivo de la historia]
-
-## Descripción
-**Como** [tipo de usuario]
-**Quiero** [acción o funcionalidad]
-**Para** [beneficio o valor]
-
-## Criterios de Aceptación
-
-### Escenario 1: [Nombre del escenario]
-```gherkin
-Dado [contexto inicial]
-Cuando [acción del usuario]
-Entonces [resultado esperado]
-```
-
-### Escenario 2: [Nombre del escenario]
-```gherkin
-Dado [contexto inicial]
-Cuando [acción del usuario]
-Entonces [resultado esperado]
-```
-
-## Notas
-[Información adicional, dependencias, restricciones...]
-
-## Estimación
-[Puntos de historia / Talla (S, M, L, XL)]
-
-## Prioridad
-[Alta / Media / Baja]
-
-## Tareas
-| Código | Nombre | Responsable |
-|--------|--------|-------------|
-| HU-XXX-01 | [Descripción de la tarea] | [Nombre] |
-| HU-XXX-02 | [Descripción de la tarea] | [Nombre] |
-
-
-
-# Historia de Usuario
-
-## ID
-HU-002
+HU-004
 
 ## Título
 Gestión de Parcelas y Alertas Personalizadas (CRUD)
@@ -152,7 +233,8 @@ Alta (Requisito obligatorio de gestión de datos propios).
 ## Tareas
 | Código | Nombre | Responsable |
 | :--- | :--- | :--- |
-| **HU-002-01** | Configuración del archivo `db.json` con la estructura inicial de parcelas | Equipo Dev |
-| **HU-002-02** | Implementación del servicio de API para CRUD (Get, Post, Put, Delete) | Equipo Dev |
-| **HU-002-03** | Creación del componente de formulario `AddParcelForm.vue` (Molecule) | Equipo Dev |
-| **HU-002-04** | Desarrollo de la vista `VineyardsView.vue` para listar y gestionar ítems | Equipo Dev |
+| **HU-004-01** | Configuración del archivo `db.json` con la estructura inicial de parcelas | Equipo Dev |
+| **HU-004-02** | Implementación del servicio de API para CRUD (Get, Post, Put, Delete) | Equipo Dev |
+| **HU-004-03** | Creación del componente de formulario `AddParcelForm.vue` (Molecule) | Equipo Dev |
+| **HU-004-04** | Desarrollo de la vista `VineyardsView.vue` para listar y gestionar ítems | Equipo Dev |
+
