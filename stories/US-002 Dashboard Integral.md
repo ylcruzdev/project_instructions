@@ -1,16 +1,14 @@
-
+# Historia de Usuario
 
 ## ID
-HU-002
+US-002
 
 ## Título
 Dashboard Integral de Monitoreo y Alerta Temprana
 
 ## Descripción
 **Como** Viticultor de Txakoli
-
 **Quiero** visualizar un panel con datos de temperatura, humedad (suelo/aire), evapotranspiración, nubes, heladas y golpes de calor
-
 **Para**  recibir alertas automáticas de riesgo de enfermedades o condiciones adversas y tomar medidas preventivas que protejan mi cosecha.
 
 ## Criterios de Aceptación
@@ -18,9 +16,7 @@ Dashboard Integral de Monitoreo y Alerta Temprana
 ### Escenario 1: Visualización de métricas críticas
 ```gherkin
 Dado que el usuario ha iniciado sesión
-
 Cuando carga el Dashboard
-
 Entonces debe ver tarjetas con datos en tiempo real de:
   - Temperatura y Humedad Ambiental 
   - Temperatura y Humedad del Suelo 
@@ -33,9 +29,7 @@ Y los datos deben provenir de la API de Open-Meteo
 ### Escenario 2: Activación de Alertas y Recomendaciones por enfermedad
 ```gherkin
 Dado que los datos de la API cumplen condiciones de riesgo por enfermedad fúngica (ej. alta humedad y temperaturas moderadas)
-
 Cuando el componente procesa los datos
-
 Entonces se muestra la alerta: "Riesgo de posible Enfermedad detectado" y se especifican riesgos como Mildiú, Botrytis, Oídio o Excoriosis y se ofrece una recomendación específica (ej. aumentar aireación constante en espalderas)
 ```
 
