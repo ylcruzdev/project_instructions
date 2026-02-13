@@ -49,7 +49,8 @@ Alta (Bloqueante para el resto de funcionalidades)
 ## Tareas
 | Código | Nombre | Responsable |
 |--------|--------|-------------|
-| US-001-01 | Diseño de la interfaz de Login/Registro en Figma (Responsive) | Equipo Dev |
-| US-001-02 | Implementación del formulario con validaciones en Vue 3 | Equipo Dev |
-| US-001-03 | Creación del Store de autenticación con Pinia | Equipo Dev |
-| US-001-04 | Servicio de conexión con Json-Server para persistencia de usuarios | Equipo Dev |
+| TK-001-01 | Diseño de la interfaz de Login/Registro en Figma (Responsive) | Equipo Dev |
+| TK-001-02 | Implementación del formulario con validaciones en Vue 3 | Equipo Dev |
+| TK-001-03 | Creación del Store de autenticación con Pinia | Equipo Dev |
+| TK-001-04 | Servicio de conexión con Json-Server para persistencia de usuarios | Equipo Dev |
+| TK-001-05 | Sincronizar pinia con LocalStorage para la persistencia de datos y sessison | Equipo Dev |
