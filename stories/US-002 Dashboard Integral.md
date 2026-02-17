@@ -56,6 +56,7 @@ Alta.
 
 ## Tareas
 | Código | Nombre | Responsable |
+|--------|--------|-------------|
 | **TK-003-01** | Configuración de la conexión asíncrona a la API Open-Meteo en `services/` | Equipo Dev |
 | **TK-002-02** | Implementación de peticiones a Open-Meteo para métricas de suelo y aire| Equipo Dev |
 | **TK-003-03** | Creación del Composable `useWeather.ts` para gestionar la lógica de fetching | Equipo Dev |
